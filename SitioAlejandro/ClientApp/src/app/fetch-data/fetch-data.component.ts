@@ -11,7 +11,10 @@ export class FetchDataComponent {
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
     http.get<WeatherForecast[]>(baseUrl + 'weatherforecast').subscribe(result => {
       this.forecasts = result;
+      this.forecasts.map(x => x.date = (new Date(x.date)).toLocaleString("fr-CA"));
     }, error => console.error(error));
+
+    
   }
 }
 
